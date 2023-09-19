@@ -1,10 +1,9 @@
-import { GET_JOBS, GET_JOBS_ERROR_OFF, GET_JOBS_ERROR_ON, GET_JOBS_LOADING_OFF, GET_JOBS_LOADING_ON } from "../actions";
+import { GET_JOBS, GET_JOBS_ERROR, GET_JOBS_LOADING } from "../actions";
 
 const initialState = {
   content: [],
-  isLoading: true,
-  hasError: false,
-  errorMessage: "",
+  loading: false,
+  error: false,
 };
 
 const jobsReducer = (state = initialState, action) => {
@@ -15,27 +14,16 @@ const jobsReducer = (state = initialState, action) => {
         content: action.payload,
       };
 
-    case GET_JOBS_LOADING_ON:
+    case GET_JOBS_LOADING:
       return {
         ...state,
-        isLoading: true,
+        loading: action.payload,
       };
-    case GET_JOBS_LOADING_OFF:
+
+    case GET_JOBS_ERROR:
       return {
         ...state,
-        isLoading: false,
-      };
-    case GET_JOBS_ERROR_ON:
-      return {
-        ...state,
-        hasError: true,
-        errorMessage: action.payload,
-      };
-    case GET_JOBS_ERROR_OFF:
-      return {
-        ...state,
-        hasError: false,
-        errorMessage: "",
+        error: action.payload,
       };
 
     default:
